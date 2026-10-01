@@ -61,6 +61,7 @@ Available Datasets
    tiny_imagenet
    tiny_imagenet_c
    imagenet_a
+   imagenet_r
    e_mnist
    fgvc_aircraft
    flowers102
