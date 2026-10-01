@@ -52,7 +52,8 @@ def test_class_lists_match_imagenet_1k():
     assert len(set(IMAGENET_A_CLASS_NAMES)) == 200
 
     # Same classes, in the same order, as the canonical ImageNet-1K list
-    assert IMAGENET_A_WNIDS == [wnid for wnid in IN1K_CLASSES if wnid in set(IMAGENET_A_WNIDS)]
+    imagenet_a_wnids = set(IMAGENET_A_WNIDS)
+    assert IMAGENET_A_WNIDS == [wnid for wnid in IN1K_CLASSES if wnid in imagenet_a_wnids]
 
     # Label i maps to the ImageNet-1K index of class i
     assert IMAGENET_A_TO_IN1K == [WNID_TO_IDX[wnid] for wnid in IMAGENET_A_WNIDS]
@@ -133,7 +134,7 @@ def test_imagenet_a_real_dataset():
     # Test 1: the published size
     assert len(ds) == 7500, f"Expected 7500 samples, got {len(ds)}."
 
-    # Test 2: one sample has the expected keys, image type and label range
+    # Test 2: one sample has the expected keys, an HxWx3 uint8 image and an integer label
     sample = ds[0]
     assert set(sample.keys()) == {"image", "label"}
     image_np = np.array(sample["image"])
@@ -148,3 +149,8 @@ def test_imagenet_a_real_dataset():
         labels.append(sample["label"])
     assert len(labels) == 7500
     assert set(labels) == set(range(200)), f"Expected all 200 classes, got {len(set(labels))}."
+
+    # Test 4: loading without a split returns the single "test" split
+    all_splits = ImageNetA(split=None)
+    assert list(all_splits.keys()) == ["test"]
+    assert len(all_splits["test"]) == 7500
