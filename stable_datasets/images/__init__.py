@@ -32,6 +32,7 @@ from .imagenet_1k import ImageNet1K
 from .imagenet_10 import Imagenette
 from .imagenet_100 import ImageNet100
 from .imagenet_a import ImageNetA
+from .imagenet_r import ImageNetR
 from .k_mnist import KMNIST
 from .linnaeus5 import Linnaeus5
 from .med_mnist import MedMNIST
@@ -78,6 +79,7 @@ __all__ = [
     "ImageNet1K",
     "ImageNet100",
     "ImageNetA",
+    "ImageNetR",
     "Imagenette",
     "KMNIST",
     "Linnaeus5",
