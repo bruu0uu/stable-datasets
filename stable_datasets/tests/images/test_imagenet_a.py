@@ -126,7 +126,6 @@ def test_unknown_class_folder_fails_loudly(tmp_path):
         list(builder._generate_examples(data_path=tar_path, split="test"))
 
 
-@pytest.mark.large
 def test_imagenet_a_real_dataset():
     # Downloads (0.7 GB) on first use, then loads from the processed cache
     ds = ImageNetA(split="test")
